@@ -3,7 +3,9 @@ package com.example.expenseapp.controller;
 
 import com.example.expenseapp.entity.Expense;
 import com.example.expenseapp.service.ExpenseService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public class ExpenseController {
     public Expense getExpenseById(@PathVariable("id") Long id ){
      return expenseService.getExpenseById(id);
     }
+
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     @DeleteMapping("/expenses/{id}")
     public void deleteExpenseById(@PathVariable("id") Long id ){
         expenseService.deleteExpenseById(id);
@@ -32,8 +36,9 @@ public class ExpenseController {
 
     }
 
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping("/expenses")
-    public Expense saveExpenseDetails(@RequestBody Expense expense){
+    public Expense saveExpenseDetails(@Valid  @RequestBody Expense expense){
     return expenseService.saveExpenseDetails(expense);
     }
 }

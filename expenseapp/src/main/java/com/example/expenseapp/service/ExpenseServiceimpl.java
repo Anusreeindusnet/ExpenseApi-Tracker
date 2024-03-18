@@ -1,6 +1,7 @@
 package com.example.expenseapp.service;
 
 import com.example.expenseapp.entity.Expense;
+import com.example.expenseapp.exceptions.ResourceNotFoundException;
 import com.example.expenseapp.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class ExpenseServiceimpl implements ExpenseService{
        if(expense.isPresent()){
           return expense.get();
        }
-       throw new RuntimeException("Expense not found"+id);
+       throw new ResourceNotFoundException("Expense not found "+id);
     }
 
     @Override
