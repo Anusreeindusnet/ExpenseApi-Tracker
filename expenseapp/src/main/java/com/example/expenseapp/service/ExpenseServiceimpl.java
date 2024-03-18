@@ -6,6 +6,7 @@ import com.example.expenseapp.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +48,9 @@ public class ExpenseServiceimpl implements ExpenseService{
 
     @Override
     public void deleteExpenseById(Long id) {
-        expenseRepo.deleteById(id);
+       Expense expense=getExpenseById(id);
+       expenseRepo.delete(expense);
     }
+
+
 }

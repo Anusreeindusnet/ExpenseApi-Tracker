@@ -63,4 +63,15 @@ public class GobalException {
 
         return new ResponseEntity<Map<String,String>>(resp,HttpStatus.BAD_REQUEST );
     }
+
+    @ExceptionHandler(ItemAlreadyExitsException.class)
+    public ResponseEntity<ErrorObject >handleItemAlreadyExitsException(ItemAlreadyExitsException ex, WebRequest request){
+        ErrorObject errorObject=new ErrorObject();
+        errorObject.setStatuscode(HttpStatus.CONFLICT.value());
+        errorObject.setMessage(ex.getMessage());
+        errorObject.setTimestamp(new Date());
+        return new ResponseEntity<ErrorObject>(errorObject,HttpStatus.CONFLICT);
+
+    }
+
 }
